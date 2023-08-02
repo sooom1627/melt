@@ -1,4 +1,4 @@
-import { atom, DefaultValue, Loadable, MutableSnapshot } from "recoil";
+import { atom, DefaultValue, selector } from "recoil";
 import { Task } from "../models/Task";
 
 const parseStoredTasks = (item: string): Task[] => {
@@ -38,4 +38,28 @@ export const taskState = atom<Task[]>({
 	key: "taskState",
 	default: [],
 	effects_UNSTABLE: [localStorageEffect("tasks")],
+});
+
+export const filterTasks = selector<Task[]>({
+	key: "filterTasks",
+	get: ({ get }) => {
+		const tasks = get(taskState);
+		const today = new Date();
+		today.setHours(0, 0, 0, 0); // Set to start of today
+
+		return tasks.filter((task) => {
+			if (task.status === "ended" && task.end) {
+				const endDate = new Date(task.end);
+				endDate.setHours(0, 0, 0, 0); // Set to start of end date
+
+				// If end date is before today
+				if (endDate.getTime() < today.getTime()) {
+					return false; // Exclude the task
+				}
+			}
+
+			// If status is not 'ended' or 'end' is not before today
+			return true; // Include the task
+		});
+	},
 });

@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { taskState } from "../../../providers/taskListProvider";
+import { selectedTaskState } from "../../../providers/selectedTaskProvider";
 
 import { Task } from "../../../models/Task";
 
@@ -6,17 +9,14 @@ interface Props {
 	showModal: boolean;
 	task: Task;
 	toggleModal: () => void;
-	removeTask: (id: string) => void;
-	changeTaskName: (id: string, newName: string) => void;
 }
 
 export const TaskEditModal: React.FC<Props> = ({
 	showModal,
 	toggleModal,
 	task,
-	removeTask,
-	changeTaskName,
 }) => {
+	const [tasks, setTasks] = useRecoilState(taskState);
 	const [editTaskName, setEditTaskName] = useState(task.name);
 
 	useEffect(() => {
@@ -26,6 +26,24 @@ export const TaskEditModal: React.FC<Props> = ({
 	const childClick = (e: React.MouseEvent) => {
 		e.stopPropagation();
 		console.log("Child clicked");
+	};
+
+	const removeTask = (id: string) => {
+		toggleModal();
+		setTasks((currentTasks) => currentTasks.filter((task) => task.id !== id));
+	};
+
+	const changeTaskName = (id: string, newName: string) => {
+		toggleModal();
+		setTasks((currentTasks) =>
+			currentTasks.map((task) => {
+				if (task.id === id) {
+					return { ...task, name: newName };
+				} else {
+					return task;
+				}
+			})
+		);
 	};
 
 	return (
