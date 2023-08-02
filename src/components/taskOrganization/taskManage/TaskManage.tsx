@@ -11,12 +11,8 @@ import { CustomTabPanel, a11yProps } from "./MaterialUiTabs";
 // customhooks
 import { useSortedTasks } from "../../../hooks/useSortedAndFilteredTasks";
 
-import { useRecoilState, useRecoilValue } from "recoil";
-import { taskState, filterTasks } from "../../../providers/taskListProvider";
-import {
-	selectedTaskState,
-	selectedTaskIdState,
-} from "../../../providers/selectedTaskProvider";
+import { useRecoilValue } from "recoil";
+import { filterTasks } from "../../../providers/taskListProvider";
 
 // mdoels
 import { Task } from "../../../models/Task";
@@ -26,30 +22,29 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 
 export const TaskManage: React.FC = () => {
-	const [tasks] = useRecoilState(taskState);
 	const filterdTasks = useRecoilValue(filterTasks);
 	const [value, setValue] = React.useState(0);
-	const [todoTasks, setTodoTasks] = useState<Task[]>([]);
-	const [doingTasks, setDoingTasks] = useState<Task[]>([]);
-	const [doneTasks, setDoneTasks] = useState<Task[]>([]);
+	const [tasksByStatus, setTasksByStatus] = useState<{
+		todoTasks: Task[];
+		doingTasks: Task[];
+		doneTasks: Task[];
+	}>({
+		todoTasks: [],
+		doingTasks: [],
+		doneTasks: [],
+	});
 
-	const createdTasks = useSortedTasks(filterdTasks, "created", "created");
-	const startedTasks = useSortedTasks(filterdTasks, "start", "started");
-	const endedTasks = useSortedTasks(filterdTasks, "end", "ended");
+	const todoTasks = useSortedTasks(filterdTasks, "created", "created");
+	const doingTasks = useSortedTasks(filterdTasks, "start", "started");
+	const doneTasks = useSortedTasks(filterdTasks, "end", "ended");
 
 	useEffect(() => {
-		setTodoTasks(createdTasks);
-		setDoingTasks(startedTasks);
-		setDoneTasks(endedTasks);
-	}, [tasks]);
-
-	const [selectedTaskId, setSelectedTaskId] =
-		useRecoilState(selectedTaskIdState);
-	const selectedTask = useRecoilValue(selectedTaskState);
-
-	const selectTask = (taskId: string) => {
-		setSelectedTaskId(taskId);
-	};
+		setTasksByStatus({
+			todoTasks,
+			doingTasks,
+			doneTasks,
+		});
+	}, [filterTasks, todoTasks, doingTasks, doneTasks]);
 
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
 		setValue(newValue);
@@ -73,24 +68,21 @@ export const TaskManage: React.FC = () => {
 					</Box>
 					<CustomTabPanel value={value} index={0}>
 						<TaskList
-							taskList={todoTasks}
-							selectTask={selectTask}
+							taskList={tasksByStatus.todoTasks}
 							message="Let's add Tasks!"
 							type="todo"
 						/>
 					</CustomTabPanel>
 					<CustomTabPanel value={value} index={1}>
 						<TaskList
-							taskList={doingTasks}
-							selectTask={selectTask}
+							taskList={tasksByStatus.doingTasks}
 							message="Let's start a Task!"
 							type="doing"
 						/>
 					</CustomTabPanel>
 					<CustomTabPanel value={value} index={2}>
 						<TaskList
-							taskList={doneTasks}
-							selectTask={selectTask}
+							taskList={tasksByStatus.doneTasks}
 							message="Let's finish a Task!"
 							type="done"
 						/>

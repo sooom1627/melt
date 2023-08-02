@@ -1,29 +1,25 @@
-import React, { useEffect, useState } from "react";
-
-import { useRecoilState, useRecoilValue } from "recoil";
-import { taskState, filterTasks } from "../../../providers/taskListProvider";
+import React from "react";
+import { useRecoilState } from "recoil";
+import { selectedTaskIdState } from "../../../providers/selectedTaskProvider";
 
 // utils
-import {
-	calculateElapsedTime,
-	formatElapsedTime,
-} from "../../../utils/timeUtils";
+import { formatElapsedTime } from "../../../utils/timeUtils";
 // models
 import { Task } from "../../../models/Task";
 
 interface Props {
 	taskList: Task[];
-	selectTask: (taskId: string) => void;
 	message: string;
 	type: "todo" | "doing" | "done";
 }
 
-export const TaskList: React.FC<Props> = ({
-	taskList,
-	selectTask,
-	message,
-	type,
-}) => {
+export const TaskList: React.FC<Props> = ({ taskList, message, type }) => {
+	const [selectedTaskId, setSelectedTaskId] =
+		useRecoilState(selectedTaskIdState);
+
+	const selectTask = (taskId: string) => {
+		setSelectedTaskId(taskId);
+	};
 	return (
 		<>
 			{taskList.length > 0 ? (
