@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+		monospace;
+}
+
+/* 縦方向のスクロールバー */
+::-webkit-scrollbar {
+	display: none;
+}
+
+/* 横方向のスクロールバー */
+::-webkit-scrollbar-horizontal {
+	display: none;
+}
+
+/* 縦方向のスクロールバーのスライダー（つまみ部分） */
+::-webkit-scrollbar-thumb {
+	display: none;
+}
