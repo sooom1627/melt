@@ -1,11 +1,10 @@
 import React from "react";
-
-import { useRecoilState } from "recoil";
-import { taskState } from "../providers/taskListProvider";
-
 // packedge
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+//Recoil
+import { useRecoilState } from "recoil";
+import { taskState } from "../providers/taskListProvider";
 
 export const Sidebar = () => {
 	const [tasks] = useRecoilState(taskState);

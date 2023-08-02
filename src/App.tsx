@@ -1,10 +1,8 @@
 import React from "react";
-
 // packege
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 // conmonents
 import { Sidebar } from "./components/Sidebar";
 import { TaskOrganization } from "./components/taskOrganization/TaskOrganization";

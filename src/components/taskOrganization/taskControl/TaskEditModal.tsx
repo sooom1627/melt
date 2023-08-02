@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+//Recoil
+import { useRecoilState } from "recoil";
 import { taskState } from "../../../providers/taskListProvider";
-import { selectedTaskState } from "../../../providers/selectedTaskProvider";
-
+// models
 import { Task } from "../../../models/Task";
 
 interface Props {

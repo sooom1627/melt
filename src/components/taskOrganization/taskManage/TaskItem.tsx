@@ -1,9 +1,11 @@
 import React from "react";
-
+// Recoil
 import { useRecoilState } from "recoil";
 import { selectedTaskIdState } from "../../../providers/selectedTaskProvider";
-import { Task } from "../../../models/Task";
+// utils
 import { formatElapsedTime } from "../../../utils/timeUtils";
+// models
+import { Task } from "../../../models/Task";
 
 interface Props {
 	task: Task;

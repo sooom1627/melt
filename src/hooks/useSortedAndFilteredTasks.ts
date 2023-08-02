@@ -1,14 +1,6 @@
 import { useMemo } from 'react';
-
-export interface Task {
-  id: string;
-  name: string;
-  status: "created" | "started" | "ended";
-  created: Date;
-  start?: Date;
-  end?: Date;
-  duration?: number;  // in milliseconds
-}
+// models
+import { Task } from "../models/Task"
 
 export const useSortedTasks = (tasks: Task[], sortBy: 'created' | 'start' | 'end', status?: Task['status']): Task[] => {
   return useMemo(() => {

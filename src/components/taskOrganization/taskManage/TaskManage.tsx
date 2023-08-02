@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from "react";
-
-// packege
-import { v4 as uuidv4 } from "uuid";
-import { toast } from "react-toastify";
-
+// Recoil
+import { useRecoilValue } from "recoil";
+import { filterTasks } from "../../../providers/taskListProvider";
+// customhooks
+import { useSortedTasks } from "../../../hooks/useSortedAndFilteredTasks";
 // components
 import { TaskList } from "./TaskList";
 import { AddTask } from "./AddTask";
 import { CustomTabPanel, a11yProps } from "./MaterialUiTabs";
-// customhooks
-import { useSortedTasks } from "../../../hooks/useSortedAndFilteredTasks";
-
-import { useRecoilValue } from "recoil";
-import { filterTasks } from "../../../providers/taskListProvider";
-
-// mdoels
+// models
 import { Task } from "../../../models/Task";
 //ui
 import Tabs from "@mui/material/Tabs";

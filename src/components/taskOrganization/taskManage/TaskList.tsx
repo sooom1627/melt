@@ -1,7 +1,6 @@
 import React from "react";
-
+// components
 import { TaskItem } from "./TaskItem";
-
 // models
 import { Task } from "../../../models/Task";
 

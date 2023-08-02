@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
+// Recoil
 import { useRecoilState, useRecoilValue } from "recoil";
-
-import { TaskEditModal } from "./TaskEditModal";
-
 import { taskState } from "../../../providers/taskListProvider";
 import { selectedTaskState } from "../../../providers/selectedTaskProvider";
 //utils
@@ -10,6 +8,8 @@ import {
 	calculateElapsedTime,
 	formatElapsedTime,
 } from "../../../utils/timeUtils";
+// components
+import { TaskEditModal } from "./TaskEditModal";
 // assets
 import image from "../../../assets/Multitasking-amico.png";
 
