@@ -10,9 +10,10 @@ import { Task } from "../../../models/Task";
 interface Props {
 	task: Task;
 	type: "todo" | "doing" | "done";
+	disable: string;
 }
 
-export const TaskItem: React.FC<Props> = ({ task, type }) => {
+export const TaskItem: React.FC<Props> = ({ task, type, disable }) => {
 	const [selectedTaskId, setSelectedTaskId] =
 		useRecoilState(selectedTaskIdState);
 
@@ -48,27 +49,31 @@ export const TaskItem: React.FC<Props> = ({ task, type }) => {
 						)}
 					</p>
 				</div>
-				<div
-					onClick={() => selectTask(task.id)}
-					className="flex items-center px-4 py-2 ml-2 min-w-fit text-sm cursor-pointer font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700"
-				>
-					タスク詳細
-					<svg
-						className="w-3 h-3 ml-2"
-						aria-hidden="true"
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 14 10"
+				{disable !== "" ? (
+					<div
+						onClick={() => selectTask(task.id)}
+						className="flex items-center px-4 py-2 ml-2 min-w-fit text-sm cursor-pointer font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700"
 					>
-						<path
-							stroke="currentColor"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M1 5h12m0 0L9 1m4 4L9 9"
-						/>
-					</svg>
-				</div>
+						タスク詳細
+						<svg
+							className="w-3 h-3 ml-2"
+							aria-hidden="true"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 14 10"
+						>
+							<path
+								stroke="currentColor"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M1 5h12m0 0L9 1m4 4L9 9"
+							/>
+						</svg>
+					</div>
+				) : (
+					<></>
+				)}
 			</div>
 		</li>
 	);

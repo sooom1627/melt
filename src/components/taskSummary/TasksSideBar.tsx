@@ -1,4 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+// hooks
+import { useSortedTasks } from "../../hooks/useSortedAndFilteredTasks";
+// components
+import { TaskList } from "../taskOrganization/taskManage/TaskList";
 // models
 import { Task } from "../../models/Task";
 
@@ -15,24 +19,28 @@ export const TasksSidebar: React.FC<Props> = ({
 	date,
 	onClickShowTasks,
 }) => {
-	const getTasksEndedOnDate = (tasks: Task[], dateStr: string) => {
-		const date = new Date(dateStr);
-
-		return tasks.filter((task) => {
-			if (task.status !== "ended" || !task.end) return false;
-
-			return (
-				task.end.getDate() === date.getDate() &&
-				task.end.getMonth() === date.getMonth() &&
-				task.end.getFullYear() === date.getFullYear()
-			);
-		});
-	};
+	const [showTasksList, setShowTasksList] = useState<Task[]>([]);
+	const doneTasks = useSortedTasks(tasks, "end", "ended");
 
 	useEffect(() => {
-		const showTasksList = getTasksEndedOnDate(tasks, date);
-		console.log(showTasksList);
-	}, [date]);
+		const getTasksEndedOnDate = (tasks: Task[], dateStr: string) => {
+			const targetDate = new Date(dateStr);
+
+			return tasks.filter((task) => {
+				if (task.status !== "ended" || !task.end) return false;
+				// タスクの終了日をDateオブジェクトに変換
+				const taskEndDate = new Date(task.end);
+				// 年、月、日が一致するか確認（月は0から始まるため、+1する）
+				return (
+					taskEndDate.getFullYear() === targetDate.getFullYear() &&
+					taskEndDate.getMonth() + 1 === targetDate.getMonth() + 1 &&
+					taskEndDate.getDate() === targetDate.getDate()
+				);
+			});
+		};
+		const data = getTasksEndedOnDate(doneTasks, date);
+		setShowTasksList(data);
+	}, [date, tasks]);
 
 	return (
 		<>
@@ -43,14 +51,37 @@ export const TasksSidebar: React.FC<Props> = ({
 				}`}
 			></div>
 			<div
-				className={`fixed right-0 top-0 h-full w-2/6 bg-white transition-transform duration-300 ease-in-out z-10 overflow-scroll ${
+				className={`p-4 fixed right-0 top-0 h-full w-96 bg-white transition-transform duration-300 ease-in-out z-10 overflow-scroll ${
 					showTasks ? "animate-slide" : "transform translate-x-full"
 				}`}
 			>
-				<button onClick={onClickShowTasks} className="p-4">
-					Close
-				</button>
-				{showTasks}
+				<div className="flex flex-row my-4 px-2 items-center">
+					<p className="text-lg font-bold">{date}の完了タスク</p>
+					<button
+						type="button"
+						onClick={onClickShowTasks}
+						className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+						data-modal-hide="defaultModal"
+					>
+						<svg
+							className="w-3 h-3"
+							aria-hidden="true"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 14 14"
+						>
+							<path
+								stroke="currentColor"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+							/>
+						</svg>
+						<span className="sr-only">Close modal</span>
+					</button>
+				</div>
+				<TaskList taskList={showTasksList} message="" type="done" />
 			</div>
 		</>
 	);

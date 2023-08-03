@@ -16,7 +16,7 @@ export const TaskList: React.FC<Props> = ({ taskList, message, type }) => {
 			{taskList.length > 0 ? (
 				<ol className="relative border-l border-gray-200 dark:border-gray-700">
 					{taskList.map((task) => (
-						<TaskItem task={task} type={type} />
+						<TaskItem task={task} type={type} disable={message} />
 					))}
 				</ol>
 			) : (

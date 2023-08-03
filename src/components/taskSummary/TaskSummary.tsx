@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // packedge
 import { BarChart } from "./charts/BarChart";
 // Recoil
@@ -30,8 +30,8 @@ export const TaskSummary = () => {
 				/>
 				<TasksSidebar
 					tasks={tasks}
-					showTasks={showTasks}
 					date={date}
+					showTasks={showTasks}
 					onClickShowTasks={onClickShowTasks}
 				/>
 			</div>
