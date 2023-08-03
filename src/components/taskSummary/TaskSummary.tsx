@@ -6,8 +6,6 @@ import { useRecoilState } from "recoil";
 import { taskState } from "../../providers/taskListProvider";
 // components
 import { TasksSidebar } from "./TasksSideBar";
-// models
-import { Task } from "../../models/Task";
 
 export const TaskSummary = () => {
 	// Barchart内にこコンポーネントを作成できないため、ここで定義

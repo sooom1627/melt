@@ -23,12 +23,21 @@ export const BarChart: React.FC<Props> = ({
 			data={barChartData}
 			keys={["完了タスク"]}
 			indexBy="date"
-			margin={{ top: 24, right: 200, bottom: 72, left: 60 }}
-			padding={0.3}
-			colors="#1876D1"
+			margin={{ top: 24, right: 200, bottom: 24, left: 60 }}
+			padding={0.2}
+			colors="#1D40AF"
 			onClick={(dataPoint) => {
 				setDate(dataPoint.data.date);
 				onClickShowTasks();
+			}}
+			// ラベルの文字サイズ変更のためにカスタマイズ
+			theme={{
+				labels: {
+					text: {
+						fontSize: 14,
+						fontWeight: "bold",
+					},
+				},
 			}}
 			borderColor={{
 				from: "color",
@@ -54,7 +63,7 @@ export const BarChart: React.FC<Props> = ({
 					justify: false,
 					translateX: 120,
 					translateY: 0,
-					itemsSpacing: 2,
+					itemsSpacing: 1,
 					itemWidth: 100,
 					itemHeight: 20,
 					itemDirection: "left-to-right",
@@ -72,7 +81,7 @@ export const BarChart: React.FC<Props> = ({
 			role="application"
 			ariaLabel="Nivo bar chart demo"
 			barAriaLabel={(e) =>
-				e.id + ": " + e.formattedValue + " in country: " + e.indexValue
+				e.id + ": " + e.formattedValue + " in date: " + e.indexValue
 			}
 		/>
 	);
