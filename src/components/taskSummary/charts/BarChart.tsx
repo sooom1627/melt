@@ -16,7 +16,7 @@ export const BarChart: React.FC = () => {
 			data={barChartData}
 			keys={["完了タスク"]}
 			indexBy="date"
-			margin={{ top: 100, right: 200, bottom: 100, left: 60 }}
+			margin={{ top: 24, right: 200, bottom: 72, left: 60 }}
 			padding={0.3}
 			colors="#1876D1"
 			borderColor={{
@@ -30,9 +30,7 @@ export const BarChart: React.FC = () => {
 				tickSize: 5,
 				tickPadding: 5,
 				tickRotation: 0,
-				legend: "日にち",
 				legendPosition: "middle",
-				legendOffset: 32,
 			}}
 			labelSkipWidth={12}
 			labelSkipHeight={12}
