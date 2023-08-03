@@ -1,14 +1,21 @@
 import React from "react";
 //packedge
 import { ResponsiveBar } from "@nivo/bar";
-//Recoil
-import { useRecoilState } from "recoil";
-import { taskState } from "../../../providers/taskListProvider";
 // utils
 import { generateBarChartData } from "../../../utils/chartDataUtils";
+import { Task } from "../../../models/Task";
 
-export const BarChart: React.FC = () => {
-	const [tasks] = useRecoilState(taskState);
+interface Props {
+	tasks: Task[];
+	onClickShowTasks: () => void;
+	setDate: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export const BarChart: React.FC<Props> = ({
+	tasks,
+	onClickShowTasks,
+	setDate,
+}) => {
 	const barChartData = generateBarChartData(tasks);
 
 	return (
@@ -19,6 +26,10 @@ export const BarChart: React.FC = () => {
 			margin={{ top: 24, right: 200, bottom: 72, left: 60 }}
 			padding={0.3}
 			colors="#1876D1"
+			onClick={(dataPoint) => {
+				setDate(dataPoint.data.date);
+				onClickShowTasks();
+			}}
 			borderColor={{
 				from: "color",
 				modifiers: [["darker", 1.6]],
