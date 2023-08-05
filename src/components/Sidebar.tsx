@@ -78,6 +78,34 @@ export const Sidebar = () => {
 								</div>
 							</Link>
 						</li>
+						<li>
+							<Link to="/tags">
+								<div
+									className={`flex items-center p-2 text-gray-900 rounded-lg ${
+										location.pathname === "/tags"
+											? "bg-gray-200"
+											: "hover:bg-gray-100"
+									} group`}
+								>
+									<svg
+										className={`flex-shrink-0 w-4 h-5 text-gray-500 transition duration-75 ${
+											location.pathname === "/tgas"
+												? "bg-gray-200"
+												: "hover:bg-gray-100"
+										}`}
+										aria-hidden="true"
+										xmlns="http://www.w3.org/2000/svg"
+										fill="currentColor"
+										viewBox="0 0 16 18"
+									>
+										<path d="M13 20a1 1 0 0 1-.64-.231L7 15.3l-5.36 4.469A1 1 0 0 1 0 19V2a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v17a1 1 0 0 1-1 1Z"></path>
+									</svg>
+									<span className="flex-1 ml-3 whitespace-nowrap">
+										タグ管理
+									</span>
+								</div>
+							</Link>
+						</li>
 					</ul>
 				</div>
 			</aside>
