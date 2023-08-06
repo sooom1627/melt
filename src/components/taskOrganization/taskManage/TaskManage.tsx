@@ -29,7 +29,7 @@ export const TaskManage: React.FC = () => {
 	});
 
 	const todoTasks = useSortedTasks(filterdTasks, "created", "created");
-	const doingTasks = useSortedTasks(filterdTasks, "start", "started");
+	const doingTasks = useSortedTasks(filterdTasks, "start", "active");
 	const doneTasks = useSortedTasks(filterdTasks, "end", "ended");
 
 	useEffect(() => {
