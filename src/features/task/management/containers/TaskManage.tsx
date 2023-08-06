@@ -63,21 +63,21 @@ export const TaskManage: React.FC = () => {
 					<CustomTabPanel value={value} index={0}>
 						<TaskList
 							taskList={tasksByStatus.todoTasks}
-							message="Let's add Tasks!"
+							message="Create your task!"
 							type="todo"
 						/>
 					</CustomTabPanel>
 					<CustomTabPanel value={value} index={1}>
 						<TaskList
 							taskList={tasksByStatus.doingTasks}
-							message="Let's start a Task!"
+							message="Let's get to task!"
 							type="doing"
 						/>
 					</CustomTabPanel>
 					<CustomTabPanel value={value} index={2}>
 						<TaskList
 							taskList={tasksByStatus.doneTasks}
-							message="Let's finish a Task!"
+							message="Let's get the task done."
 							type="done"
 						/>
 					</CustomTabPanel>
