@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { taskState } from "../../../providers/taskListProvider";
 import { selectedTaskState } from "../../../providers/selectedTaskProvider";
+import { tagListState } from "../../../providers/tagsProvider";
 //utils
 import {
 	calculateElapsedTime,
@@ -18,6 +19,7 @@ export const TaskControl: React.FC = () => {
 	const selectedTask = useRecoilValue(selectedTaskState);
 	const [elapsedTime, setElapsedTime] = useState(0);
 	const [showModal, setShowModal] = useState(false);
+	const [tags] = useRecoilState(tagListState);
 
 	useEffect(() => {
 		if (selectedTask?.start && selectedTask.status === "started") {
@@ -88,6 +90,20 @@ export const TaskControl: React.FC = () => {
 								<h5 className="text-xl font-semibold mb-4 break-words">
 									{selectedTask?.name}
 								</h5>
+								<div>
+									{tags.map((tag) => (
+										<span
+											key={tag.id}
+											className={`${tag.color} ${
+												selectedTask.tagIds?.includes(tag.id)
+													? "opacity-100"
+													: " hidden "
+											} text-xs font-medium mr-2 px-2.5 py-0.5 mb-1 rounded inline-block`}
+										>
+											{tag.name}
+										</span>
+									))}
+								</div>
 								<div>
 									{selectedTask.status !== "created" && (
 										<p>
