@@ -94,7 +94,7 @@ export const TaskProgressBar = () => {
 					style={{ width: `${segment.percentage}%` }}
 					className={
 						segment.type === "work"
-							? "shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"
+							? "shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 rounded"
 							: ""
 					}
 				></div>
