@@ -10,7 +10,7 @@ export const TaskOrganization = () => {
 			<div className="md:w-1/2 mx-4 flex flex-col justify-start items-start h-screen pt-16">
 				<TaskManage />
 			</div>
-			<div className="md:w-1/2 mx-4 flex flex-col justify-center h-screen">
+			<div className="md:w-1/2 mx-4 flex flex-col justify-center h-screen pt-16">
 				<TaskControl />
 			</div>
 		</div>

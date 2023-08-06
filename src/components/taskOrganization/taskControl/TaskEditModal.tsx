@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 //Recoil
 import { useRecoilState } from "recoil";
 import { taskState } from "../../../providers/taskListProvider";
+import { tagListState } from "../../../providers/tagsProvider";
 // models
 import { Task } from "../../../models/Task";
 
@@ -17,7 +18,9 @@ export const TaskEditModal: React.FC<Props> = ({
 	task,
 }) => {
 	const [tasks, setTasks] = useRecoilState(taskState);
+	const [tags, setTags] = useRecoilState(tagListState);
 	const [editTaskName, setEditTaskName] = useState(task.name);
+	const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
 	useEffect(() => {
 		setEditTaskName(task.name);
@@ -38,12 +41,20 @@ export const TaskEditModal: React.FC<Props> = ({
 		setTasks((currentTasks) =>
 			currentTasks.map((task) => {
 				if (task.id === id) {
-					return { ...task, name: newName };
+					return { ...task, name: newName, tagIds: selectedTags };
 				} else {
 					return task;
 				}
 			})
 		);
+	};
+
+	const toggleTagSelection = (tagId: string) => {
+		if (selectedTags.includes(tagId)) {
+			setSelectedTags((prev) => prev.filter((id) => id !== tagId));
+		} else {
+			setSelectedTags((prev) => [...prev, tagId]);
+		}
 	};
 
 	return (
@@ -100,18 +111,36 @@ export const TaskEditModal: React.FC<Props> = ({
 								placeholder="タスク名を編集"
 							/>
 						</div>
+						<div className="px-8 pb-4">
+							<p className="text-base font-bold text-gray-900 pb-2">
+								タグを選択
+							</p>
+							{tags.map((tag) => (
+								<span
+									key={tag.id}
+									className={`${tag.color} ${
+										selectedTags.includes(tag.id)
+											? "opacity-100"
+											: " opacity-50 "
+									} text-xs font-medium mr-2 px-2.5 py-0.5 rounded cursor-pointer`}
+									onClick={() => toggleTagSelection(tag.id)}
+								>
+									{tag.name}
+								</span>
+							))}
+						</div>
 						<div className="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
 							<button
 								onClick={() => changeTaskName(task.id, editTaskName)}
 								className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
 							>
-								タスク名を変更する
+								タスクの更新
 							</button>
 							<button
 								onClick={() => removeTask(task.id)}
 								className="text-white bg-red-500  hover:bg-red-600 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 focus:z-10"
 							>
-								タスクを削除する
+								タスクの削除
 							</button>
 						</div>
 					</div>

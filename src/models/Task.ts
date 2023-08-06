@@ -5,5 +5,6 @@ export interface Task {
   created: Date;
   start ?: Date;
   end ?:Date;
-  duration ?: number; // in milliseconds
+  duration ?: number;
+  tagIds?: string[];
 }

@@ -1,4 +1,6 @@
-export interface Tgas{
-  id:number
+export interface Tags{
+  id:string
   name:string
+  color: string
+  description?: string
 }
