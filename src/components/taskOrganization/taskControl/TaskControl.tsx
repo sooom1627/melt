@@ -13,6 +13,7 @@ import {
 import { TaskEditModal } from "./TaskEditModal";
 // assets
 import image from "../../../assets/Multitasking-amico.png";
+import { TaskProgressBar } from "./TaskProgressBar";
 
 export const TaskControl: React.FC = () => {
 	const [tasks, setTasks] = useRecoilState(taskState);
@@ -162,9 +163,7 @@ export const TaskControl: React.FC = () => {
 									)}
 								</div>
 								<div className="relative mb-4 mt-4">
-									<div className="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
-										<div className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"></div>
-									</div>
+									<TaskProgressBar />
 								</div>
 								{selectedTask.start && (
 									<p>開始時間：{selectedTask.start.toLocaleString()}</p>
@@ -190,7 +189,7 @@ export const TaskControl: React.FC = () => {
 											中断
 										</button>{" "}
 										<button
-											className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 mt-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+											className="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 mt-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
 											type="button"
 											onClick={() => endTask(selectedTask?.id)}
 										>
