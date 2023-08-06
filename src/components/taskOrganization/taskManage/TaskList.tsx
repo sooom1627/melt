@@ -21,11 +21,11 @@ export const TaskList: React.FC<Props> = ({ taskList, message, type }) => {
 				</ol>
 			) : (
 				<div className="w-full text-center py-40">
-					<h1 className="mb-4 text-3xl font-extrabold text-gray-900">
+					<p className="mb-4 text-3xl font-extrabold text-gray-900">
 						<span className="text-transparent bg-clip-text bg-gradient-to-r to-sky-400 from-blue-700">
 							{message}
 						</span>
-					</h1>
+					</p>
 				</div>
 			)}
 		</>

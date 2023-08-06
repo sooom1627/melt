@@ -18,9 +18,11 @@ export const TaskEditModal: React.FC<Props> = ({
 	task,
 }) => {
 	const [tasks, setTasks] = useRecoilState(taskState);
-	const [tags, setTags] = useRecoilState(tagListState);
+	const [tags] = useRecoilState(tagListState);
 	const [editTaskName, setEditTaskName] = useState(task.name);
-	const [selectedTags, setSelectedTags] = useState<string[]>([]);
+	const [selectedTags, setSelectedTags] = useState<string[]>(
+		task.tagIds ? task.tagIds : []
+	);
 
 	useEffect(() => {
 		setEditTaskName(task.name);
@@ -122,7 +124,7 @@ export const TaskEditModal: React.FC<Props> = ({
 										selectedTags.includes(tag.id)
 											? "opacity-100"
 											: " opacity-50 "
-									} text-xs font-medium mr-2 px-2.5 py-0.5 rounded cursor-pointer`}
+									} text-sm font-medium mr-2 px-3 py-1 mb-1 rounded inline-block cursor-pointer`}
 									onClick={() => toggleTagSelection(tag.id)}
 								>
 									{tag.name}

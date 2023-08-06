@@ -2,6 +2,7 @@ import React from "react";
 // Recoil
 import { useRecoilState } from "recoil";
 import { selectedTaskIdState } from "../../../providers/selectedTaskProvider";
+import { tagListState } from "../../../providers/tagsProvider";
 // utils
 import { formatElapsedTime } from "../../../utils/timeUtils";
 // models
@@ -16,6 +17,7 @@ interface Props {
 export const TaskItem: React.FC<Props> = ({ task, type, disable }) => {
 	const [selectedTaskId, setSelectedTaskId] =
 		useRecoilState(selectedTaskIdState);
+	const [tags] = useRecoilState(tagListState);
 
 	const selectTask = (taskId: string) => {
 		setSelectedTaskId(taskId);
@@ -48,6 +50,18 @@ export const TaskItem: React.FC<Props> = ({ task, type, disable }) => {
 							<p></p>
 						)}
 					</p>
+					<div>
+						{tags.map((tag) => (
+							<span
+								key={tag.id}
+								className={`${tag.color} ${
+									task.tagIds?.includes(tag.id) ? "opacity-100" : " hidden "
+								} text-xs font-medium mr-2 px-2.5 py-0.5 mb-1 rounded inline-block`}
+							>
+								{tag.name}
+							</span>
+						))}
+					</div>
 				</div>
 				{disable !== "" ? (
 					<div
