@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from "react";
+// packedge
 import { v4 as uuidv4 } from "uuid";
+// Recoil
 import { useRecoilState } from "recoil";
 import { tagListState } from "../../providers/tagsProvider";
+// components
+import { TagsEditModal } from "./TagsEditModal";
+// models
 import { Tags } from "../../models/Tags";
 
 export const TagsManage: React.FC = () => {
 	const [newTag, setNewTag] = useState("");
 	const [tags, setTags] = useRecoilState(tagListState);
-	const [showTags, setShowTags] = useState(tags);
+	const [selectedTag, setSelectedTag] = useState<Tags>();
+	const [showModal, setShowModal] = useState(false);
 
 	const handleAddTag = (newTag: string) => {
 		if (newTag) {
 			const newTags: Tags = {
 				id: uuidv4(),
 				name: newTag,
-				color: "bg-gray-100 text-gray-800",
+				color: "bg-gray-200 text-gray-800",
 				description: "なし",
 			};
 			setTags([...tags, newTags]);
@@ -22,8 +28,18 @@ export const TagsManage: React.FC = () => {
 		}
 	};
 
+	const toggleModal = (selectedTagId?: Tags) => {
+		setSelectedTag(selectedTagId);
+		setShowModal(!showModal);
+	};
+
 	return (
 		<div className="px-12 sm:ml-60 pt-16">
+			<TagsEditModal
+				showModal={showModal}
+				toggleModal={toggleModal}
+				selectedTag={selectedTag}
+			/>
 			<form
 				className="w-full mb-8 "
 				onSubmit={(e) => {
@@ -80,12 +96,12 @@ export const TagsManage: React.FC = () => {
 								</td>
 								<td className="px-6 py-4">{tag.description}</td>
 								<td className="px-6 py-4">
-									<a
-										href="#"
-										className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+									<div
+										onClick={() => toggleModal(tag)}
+										className="font-medium text-blue-600 cursor-pointer hover:underline"
 									>
-										Edit
-									</a>
+										編集
+									</div>
 								</td>
 							</tr>
 						))}
