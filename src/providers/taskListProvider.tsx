@@ -10,6 +10,12 @@ const parseStoredTasks = (item: string): Task[] => {
 		created: new Date(task.created),
 		start: task.start ? new Date(task.start) : undefined,
 		end: task.end ? new Date(task.end) : undefined,
+		pauses: task.pauses
+			? task.pauses.map((pause: any) => ({
+					start: new Date(pause.start),
+					end: pause.end ? new Date(pause.end) : undefined,
+			  }))
+			: undefined,
 	}));
 };
 
@@ -57,7 +63,7 @@ const localStorageEffect =
 export const taskState = atom<Task[]>({
 	key: "taskState",
 	default: [],
-	effects_UNSTABLE: [localStorageEffect("tasks")], // existingTagIds の引数は不要です
+	effects_UNSTABLE: [localStorageEffect("tasks")],
 });
 
 export const filterTasks = selector<Task[]>({
