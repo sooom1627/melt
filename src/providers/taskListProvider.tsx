@@ -5,18 +5,22 @@ import { Tags } from "../models/Tags";
 
 const parseStoredTasks = (item: string): Task[] => {
 	const parsedItem = JSON.parse(item);
-	return parsedItem.map((task: any) => ({
-		...task,
-		created: new Date(task.created),
-		start: task.start ? new Date(task.start) : undefined,
-		end: task.end ? new Date(task.end) : undefined,
-		pauses: task.pauses
-			? task.pauses.map((pause: any) => ({
-					start: new Date(pause.start),
-					end: pause.end ? new Date(pause.end) : undefined,
-			  }))
-			: undefined,
-	}));
+	return parsedItem.map((task: any) => {
+		const newTask = { ...task };
+
+		newTask.created = new Date(task.created);
+		if (task.start) newTask.start = new Date(task.start);
+		if (task.end) newTask.end = new Date(task.end);
+
+		if (task.pauses) {
+			newTask.pauses = task.pauses.map((pause: any) => ({
+				start: new Date(pause.start),
+				end: pause.end ? new Date(pause.end) : null,
+			}));
+		}
+
+		return newTask;
+	});
 };
 
 const localStorageEffect =

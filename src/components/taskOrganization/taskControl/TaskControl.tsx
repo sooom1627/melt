@@ -48,6 +48,38 @@ export const TaskControl: React.FC = () => {
 		);
 	};
 
+	const pauseTask = (taskId: string) => {
+		setTasks(
+			tasks.map((t) => {
+				if (t.id === taskId && t.status === "started") {
+					let pauses = t.pauses || [];
+					pauses = [...pauses, { start: new Date(), end: null }];
+					return { ...t, status: "paused", pauses };
+				} else {
+					return t;
+				}
+			})
+		);
+	};
+
+	const resumeTask = (taskId: string) => {
+		setTasks(
+			tasks.map((t) => {
+				if (t.id === taskId && t.status === "paused" && t.pauses) {
+					const updatedPauses = [...t.pauses];
+					const lastPause = updatedPauses[updatedPauses.length - 1];
+					updatedPauses[updatedPauses.length - 1] = {
+						...lastPause,
+						end: new Date(),
+					};
+					return { ...t, status: "started", pauses: updatedPauses };
+				} else {
+					return t;
+				}
+			})
+		);
+	};
+
 	const endTask = (taskId: string) => {
 		setTasks(
 			tasks.map((t) => {
@@ -134,12 +166,29 @@ export const TaskControl: React.FC = () => {
 										スタート
 									</button>
 								) : selectedTask.status === "started" ? (
+									<div>
+										<button
+											className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 mt-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+											type="button"
+											onClick={() => pauseTask(selectedTask?.id)}
+										>
+											中断
+										</button>{" "}
+										<button
+											className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 mt-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+											type="button"
+											onClick={() => endTask(selectedTask?.id)}
+										>
+											終了
+										</button>
+									</div>
+								) : selectedTask.status === "paused" ? (
 									<button
 										className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 mt-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
 										type="button"
-										onClick={() => endTask(selectedTask?.id)}
+										onClick={() => resumeTask(selectedTask?.id)}
 									>
-										終了
+										再開
 									</button>
 								) : (
 									<div></div>

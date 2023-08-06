@@ -5,7 +5,7 @@ export interface Task {
   created: Date;
   start ?: Date;
   end ?:Date;
-  pauses?: { start: Date, end: Date }[];
+  pauses?: { start: Date | null, end: Date | null }[];
   duration ?: number;
   tagIds?: string[];
 }
