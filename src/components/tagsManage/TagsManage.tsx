@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
-// packedge
+// Packages
 import { v4 as uuidv4 } from "uuid";
 // Recoil
 import { useRecoilState } from "recoil";
 import { tagListState } from "../../providers/tagsProvider";
-// components
+// Components
 import { TagsEditModal } from "./TagsEditModal";
-// models
+// Models
 import { Tags } from "../../models/Tags";
 
 export const TagsManage: React.FC = () => {
+	// States for managing tags, selected tag and modal visibility
 	const [newTag, setNewTag] = useState("");
 	const [tags, setTags] = useRecoilState(tagListState);
 	const [selectedTag, setSelectedTag] = useState<Tags>();
 	const [showModal, setShowModal] = useState(false);
 
+	// Function to add a new tag
 	const handleAddTag = (newTag: string) => {
 		if (newTag) {
 			const newTags: Tags = {
@@ -28,6 +30,7 @@ export const TagsManage: React.FC = () => {
 		}
 	};
 
+	// Function to toggle the tag edit modal
 	const toggleModal = (selectedTagId?: Tags) => {
 		setSelectedTag(selectedTagId);
 		setShowModal(!showModal);
