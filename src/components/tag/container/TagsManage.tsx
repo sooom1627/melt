@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 // Recoil
 import { useRecoilState } from "recoil";
-import { tagListState } from "../../providers/tagsProvider";
+import { tagListState } from "../../../providers/tagsProvider";
 // Components
-import { TagsEditModal } from "./TagsEditModal";
+import { TagsEditModal } from "../components/TagsEditModal";
 // Models
-import { Tags } from "../../models/Tags";
+import { Tags } from "../../../models/Tags";
 
 export const TagsManage: React.FC = () => {
 	// States for managing tags, selected tag and modal visibility

@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 // Recoil
 import { useRecoilState, useRecoilValue } from "recoil";
-import { taskState } from "../../../providers/taskListProvider";
-import { selectedTaskState } from "../../../providers/selectedTaskProvider";
-import { tagListState } from "../../../providers/tagsProvider";
+import { taskState } from "../../../../providers/taskListProvider";
+import { selectedTaskState } from "../../../../providers/selectedTaskProvider";
+import { tagListState } from "../../../../providers/tagsProvider";
 // Utils
 import {
 	calculateElapsedTime,
 	formatElapsedTime,
-} from "../../../utils/timeUtils";
+} from "../../../../utils/timeUtils";
 // Components
-import { TaskEditModal } from "./TaskEditModal";
+import { TaskEditModal } from "../components/TaskEditModal";
 // Assets
-import image from "../../../assets/Multitasking-amico.png";
-import { TaskProgressBar } from "./TaskProgressBar";
+import image from "../../../../assets/Construction costs-amico.png";
+import { TaskProgressBar } from "../components/TaskProgressBar";
 
 export const TaskControl: React.FC = () => {
 	const [tasks, setTasks] = useRecoilState(taskState);

@@ -2,7 +2,7 @@ import React from "react";
 // Components
 import { TaskItem } from "./TaskItem";
 // Models
-import { Task } from "../../../models/Task";
+import { Task } from "../../../../models/Task";
 
 interface Props {
 	taskList: Task[];

@@ -2,9 +2,9 @@ import React from "react";
 // Packages
 import { Routes, Route } from "react-router-dom";
 // Components
-import { TaskOrganization } from "../components/taskOrganization/TaskOrganization";
-import { TaskSummary } from "../components/taskSummary/TaskSummary";
-import { TagsManage } from "../components/tagsManage/TagsManage";
+import { TaskOrganization } from "../components/task/TaskOrganization";
+import { TaskSummary } from "../components/task/summary/containers/TaskSummary";
+import { TagsManage } from "../components/tag/container/TagsManage";
 
 export const AppRouter = () => {
 	return (

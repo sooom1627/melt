@@ -1,12 +1,12 @@
 import React from "react";
 // Recoil
 import { useRecoilState } from "recoil";
-import { selectedTaskIdState } from "../../../providers/selectedTaskProvider";
-import { tagListState } from "../../../providers/tagsProvider";
+import { selectedTaskIdState } from "../../../../providers/selectedTaskProvider";
+import { tagListState } from "../../../../providers/tagsProvider";
 // Utils
-import { formatElapsedTime } from "../../../utils/timeUtils";
+import { formatElapsedTime } from "../../../../utils/timeUtils";
 // Models
-import { Task } from "../../../models/Task";
+import { Task } from "../../../../models/Task";
 
 interface Props {
 	task: Task;

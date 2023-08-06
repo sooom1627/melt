@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 // Recoil
 import { useRecoilState } from "recoil";
-import { tagListState } from "../../providers/tagsProvider";
+import { tagListState } from "../../../providers/tagsProvider";
 // Models
-import { Tags } from "../../models/Tags";
+import { Tags } from "../../../models/Tags";
 
 interface Props {
 	showModal: boolean;

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 // Recoil
 import { useRecoilState } from "recoil";
-import { taskState } from "../../../providers/taskListProvider";
-import { tagListState } from "../../../providers/tagsProvider";
+import { taskState } from "../../../../providers/taskListProvider";
+import { tagListState } from "../../../../providers/tagsProvider";
 // Models
-import { Task } from "../../../models/Task";
+import { Task } from "../../../../models/Task";
 
 interface Props {
 	showModal: boolean;

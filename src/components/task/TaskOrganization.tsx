@@ -1,7 +1,7 @@
 import React from "react";
 // Components
-import { TaskControl } from "./taskControl/TaskControl";
-import { TaskManage } from "./taskManage/TaskManage";
+import { TaskControl } from "./control/containers/TaskControl";
+import { TaskManage } from "./management/containers/TaskManage";
 
 export const TaskOrganization = () => {
 	return (

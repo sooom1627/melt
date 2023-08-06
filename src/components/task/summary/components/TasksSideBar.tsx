@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 // Custom hooks
-import { useSortedTasks } from "../../hooks/useSortedAndFilteredTasks";
+import { useSortedTasks } from "../../../../hooks/useSortedAndFilteredTasks";
 // Components
-import { TaskList } from "../taskOrganization/taskManage/TaskList";
+import { TaskList } from "../../management/components/TaskList";
 // Models
-import { Task } from "../../models/Task";
+import { Task } from "../../../../models/Task";
 
 interface Props {
 	tasks: Task[];

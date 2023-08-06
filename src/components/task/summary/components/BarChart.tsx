@@ -2,8 +2,8 @@ import React from "react";
 // Packages
 import { ResponsiveBar } from "@nivo/bar";
 // Utils
-import { generateBarChartData } from "../../../utils/chartDataUtils";
-import { Task } from "../../../models/Task";
+import { generateBarChartData } from "../../../../utils/chartDataUtils";
+import { Task } from "../../../../models/Task";
 
 interface Props {
 	tasks: Task[];

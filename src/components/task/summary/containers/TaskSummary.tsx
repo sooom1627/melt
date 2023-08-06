@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 // Packages
-import { BarChart } from "./charts/BarChart";
+import { BarChart } from "../components/BarChart";
 // Recoil
 import { useRecoilState } from "recoil";
-import { taskState } from "../../providers/taskListProvider";
+import { taskState } from "../../../../providers/taskListProvider";
 // Components
-import { TasksSidebar } from "./TasksSideBar";
+import { TasksSidebar } from "../components/TasksSideBar";
 
 export const TaskSummary = () => {
 	// States for handling tasks visibility and selected date in the BarChart

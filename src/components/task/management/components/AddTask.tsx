@@ -4,9 +4,9 @@ import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 // Recoil
 import { useRecoilState } from "recoil";
-import { taskState } from "../../../providers/taskListProvider";
+import { taskState } from "../../../../providers/taskListProvider";
 // Models
-import { Task } from "../../../models/Task";
+import { Task } from "../../../../models/Task";
 
 export const AddTask: React.FC = () => {
 	const [tasks, setTasks] = useRecoilState(taskState);
