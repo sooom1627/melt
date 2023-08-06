@@ -11,7 +11,6 @@ const parseStoredTasks = (item: string): Task[] => {
 		newTask.created = new Date(task.created);
 		if (task.start) newTask.start = new Date(task.start);
 		if (task.end) newTask.end = new Date(task.end);
-
 		if (task.pauses) {
 			newTask.pauses = task.pauses.map((pause: any) => ({
 				start: new Date(pause.start),

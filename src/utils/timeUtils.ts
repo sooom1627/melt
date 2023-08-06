@@ -1,11 +1,19 @@
-export const calculateElapsedTime = (start: Date, end?: Date) => {
-  if(end){
-    return end.getTime() - start.getTime();
-  }else{
-    const now = end || new Date();
-    return now.getTime() - start.getTime();
+export const calculateElapsedTime = (start: Date, pauses?: { start: Date |null; end?: Date | null }[], end?: Date) => {
+  const now = end || new Date();
+  let duration = now.getTime() - start.getTime();
+
+  // 中断時間を差し引く
+  if (pauses) {
+    pauses.forEach(pause => {
+      if (pause.start && pause.end) {
+        duration -= pause.end.getTime() - pause.start.getTime();
+      } else if (pause.start) { // 中断中の場合
+        duration -= now.getTime() - pause.start.getTime();
+      }
+    });
   }
-  
+
+  return duration;
 };
 
 export const formatElapsedTime = (elapsedTime: number) => {

@@ -22,10 +22,15 @@ export const TaskControl: React.FC = () => {
 	const [tags] = useRecoilState(tagListState);
 
 	useEffect(() => {
-		if (selectedTask?.start && selectedTask.status === "started") {
+		if (
+			selectedTask?.start &&
+			(selectedTask.status === "started" || selectedTask.status === "paused")
+		) {
 			const interval = setInterval(() => {
 				if (selectedTask.start !== undefined) {
-					setElapsedTime(calculateElapsedTime(selectedTask.start));
+					setElapsedTime(
+						calculateElapsedTime(selectedTask.start, selectedTask.pauses)
+					);
 				}
 			}, 1000);
 			return () => clearInterval(interval);
@@ -86,7 +91,17 @@ export const TaskControl: React.FC = () => {
 				if (t.id === taskId && t.start) {
 					const status = "ended";
 					const end = new Date();
-					const duration = end.getTime() - t.start.getTime();
+					let duration = end.getTime() - t.start.getTime();
+
+					// 中断時間を差し引く
+					if (t.pauses) {
+						t.pauses.forEach((pause) => {
+							if (pause.start && pause.end) {
+								duration -= pause.end.getTime() - pause.start.getTime();
+							}
+						});
+					}
+
 					return { ...t, status, end, duration };
 				} else {
 					return t;
