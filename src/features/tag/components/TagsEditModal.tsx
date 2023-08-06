@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 // Recoil
 import { useRecoilState } from "recoil";
 import { tagListState } from "../../../providers/tagsProvider";
+// Utils
+import { childClick } from "../../../utils/childClickPrevent";
 // Models
 import { Tags } from "../../../models/Tags";
 
@@ -35,10 +37,6 @@ export const TagsEditModal: React.FC<Props> = ({
 
 	const handleColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setSelectedColorValue(event.target.value);
-	};
-
-	const childClick = (e: React.MouseEvent) => {
-		e.stopPropagation();
 	};
 
 	const changeTagName = (

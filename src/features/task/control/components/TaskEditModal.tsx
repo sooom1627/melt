@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { taskState } from "../../../../providers/taskListProvider";
 import { tagListState } from "../../../../providers/tagsProvider";
+// Utils
+import { childClick } from "../../../../utils/childClickPrevent";
 // Models
 import { Task } from "../../../../models/Task";
 
@@ -28,11 +30,6 @@ export const TaskEditModal: React.FC<Props> = ({
 		setEditTaskName(task.name);
 		setSelectedTags(task.tagIds ? task.tagIds : []);
 	}, [task]);
-
-	const childClick = (e: React.MouseEvent) => {
-		e.stopPropagation();
-		console.log("Child clicked");
-	};
 
 	const removeTask = (id: string) => {
 		toggleModal();

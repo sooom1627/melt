@@ -12,7 +12,7 @@ import {
 // Components
 import { TaskEditModal } from "../components/TaskEditModal";
 // Assets
-import image from "../../../../assets/Construction costs-amico.png";
+import image from "../../../../assets/Multitasking-amico.png";
 import { TaskProgressBar } from "../components/TaskProgressBar";
 
 export const TaskControl: React.FC = () => {
