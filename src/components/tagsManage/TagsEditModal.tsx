@@ -64,6 +64,11 @@ export const TagsEditModal: React.FC<Props> = ({
 		);
 	};
 
+	const removeTag = (id: string) => {
+		toggleModal();
+		setTags((currentTags) => currentTags.filter((tag) => tag.id !== id));
+	};
+
 	return (
 		<>
 			<div
@@ -289,7 +294,10 @@ export const TagsEditModal: React.FC<Props> = ({
 								>
 									タグ更新
 								</button>
-								<button className="text-white bg-red-500  hover:bg-red-600 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 focus:z-10">
+								<button
+									onClick={() => removeTag(selectedTag.id)}
+									className="text-white bg-red-500  hover:bg-red-600 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 focus:z-10"
+								>
 									タグの削除
 								</button>
 							</div>

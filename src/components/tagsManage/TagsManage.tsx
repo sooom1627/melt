@@ -92,7 +92,7 @@ export const TagsManage: React.FC = () => {
 									{tag.name}
 								</th>
 								<td className="px-6 py-4">
-									<div className={`${tag.color} w-8 h-4 rounded`}></div>
+									<div className={`${tag.color} w-10 h-4 rounded`}></div>
 								</td>
 								<td className="px-6 py-4">{tag.description}</td>
 								<td className="px-6 py-4">
