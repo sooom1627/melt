@@ -26,6 +26,7 @@ export const TaskEditModal: React.FC<Props> = ({
 
 	useEffect(() => {
 		setEditTaskName(task.name);
+		setSelectedTags(task.tagIds ? task.tagIds : []);
 	}, [task]);
 
 	const childClick = (e: React.MouseEvent) => {
