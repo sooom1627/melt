@@ -1,6 +1,7 @@
-import { atom, DefaultValue, selector } from "recoil";
+import { atom, DefaultValue, selector, useRecoilState } from "recoil";
 //models
 import { Task } from "../models/Task";
+import { Tags } from "../models/Tags";
 
 const parseStoredTasks = (item: string): Task[] => {
 	const parsedItem = JSON.parse(item);
@@ -22,8 +23,26 @@ const localStorageEffect =
 		onSet: (fn: (newValue: Task[]) => void) => void;
 	}) => {
 		const savedValue = localStorage.getItem(key);
+
+		// タグの存在するIDを取得
+		const existingTagIds = JSON.parse(localStorage.getItem("tags") || "[]").map(
+			(tag: Tags) => tag.id
+		);
+
 		if (savedValue != null) {
-			setSelf(parseStoredTasks(savedValue));
+			const tasks = parseStoredTasks(savedValue);
+
+			// ローカルストレージから存在するタグを取得し、taskに紐づくtagIdが存在しない場合それを削除する
+			const sanitizedTasks = tasks.map((task) => {
+				if (!task.tagIds) return task;
+
+				return {
+					...task,
+					tagIds: task.tagIds.filter((tagId) => existingTagIds.includes(tagId)),
+				};
+			});
+
+			setSelf(sanitizedTasks);
 		}
 
 		onSet((newValue: Task[]) => {
@@ -38,7 +57,7 @@ const localStorageEffect =
 export const taskState = atom<Task[]>({
 	key: "taskState",
 	default: [],
-	effects_UNSTABLE: [localStorageEffect("tasks")],
+	effects_UNSTABLE: [localStorageEffect("tasks")], // existingTagIds の引数は不要です
 });
 
 export const filterTasks = selector<Task[]>({
