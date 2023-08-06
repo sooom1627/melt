@@ -1,5 +1,5 @@
 import React from "react";
-// packedge
+// Packages
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 

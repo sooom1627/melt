@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-//Recoil
+// Recoil
 import { useRecoilState } from "recoil";
 import { taskState } from "../../../providers/taskListProvider";
 import { tagListState } from "../../../providers/tagsProvider";
-// models
+// Models
 import { Task } from "../../../models/Task";
 
 interface Props {

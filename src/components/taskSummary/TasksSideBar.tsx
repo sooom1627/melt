@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-// hooks
+// Custom hooks
 import { useSortedTasks } from "../../hooks/useSortedAndFilteredTasks";
-// components
+// Components
 import { TaskList } from "../taskOrganization/taskManage/TaskList";
-// models
+// Models
 import { Task } from "../../models/Task";
 
 interface Props {

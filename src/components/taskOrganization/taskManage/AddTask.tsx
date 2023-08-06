@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-// packege
+// Packages
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
-//Recoil
+// Recoil
 import { useRecoilState } from "recoil";
 import { taskState } from "../../../providers/taskListProvider";
-// models
+// Models
 import { Task } from "../../../models/Task";
 
 export const AddTask: React.FC = () => {

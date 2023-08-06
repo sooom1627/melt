@@ -1,7 +1,7 @@
 import React from "react";
-// components
+// Components
 import { TaskItem } from "./TaskItem";
-// models
+// Models
 import { Task } from "../../../models/Task";
 
 interface Props {

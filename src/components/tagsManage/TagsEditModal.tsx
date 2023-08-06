@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // Recoil
 import { useRecoilState } from "recoil";
 import { tagListState } from "../../providers/tagsProvider";
-// models
+// Models
 import { Tags } from "../../models/Tags";
 
 interface Props {

@@ -1,8 +1,8 @@
 import React from "react";
-// packedge
+// Packages
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-//Recoil
+// Recoil
 import { useRecoilState } from "recoil";
 import { taskState } from "../providers/taskListProvider";
 

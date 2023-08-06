@@ -1,7 +1,7 @@
 import React from "react";
-//packedge
+// Packages
 import { ResponsiveBar } from "@nivo/bar";
-// utils
+// Utils
 import { generateBarChartData } from "../../../utils/chartDataUtils";
 import { Task } from "../../../models/Task";
 

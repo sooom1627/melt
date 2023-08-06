@@ -4,14 +4,14 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { taskState } from "../../../providers/taskListProvider";
 import { selectedTaskState } from "../../../providers/selectedTaskProvider";
 import { tagListState } from "../../../providers/tagsProvider";
-//utils
+// Utils
 import {
 	calculateElapsedTime,
 	formatElapsedTime,
 } from "../../../utils/timeUtils";
-// components
+// Components
 import { TaskEditModal } from "./TaskEditModal";
-// assets
+// Assets
 import image from "../../../assets/Multitasking-amico.png";
 import { TaskProgressBar } from "./TaskProgressBar";
 

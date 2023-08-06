@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-// Recoil
-import { useRecoilValue } from "recoil";
-import { filterTasks } from "../../../providers/taskListProvider";
-// customhooks
-import { useSortedTasks } from "../../../hooks/useSortedAndFilteredTasks";
-// components
-import { TaskList } from "./TaskList";
-import { AddTask } from "./AddTask";
-import { CustomTabPanel, a11yProps } from "./MaterialUiTabs";
-// models
-import { Task } from "../../../models/Task";
-//ui
+// Packages
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
+// Recoil
+import { useRecoilValue } from "recoil";
+import { filterTasks } from "../../../providers/taskListProvider";
+// Customhooks
+import { useSortedTasks } from "../../../hooks/useSortedAndFilteredTasks";
+// Components
+import { TaskList } from "./TaskList";
+import { AddTask } from "./AddTask";
+import { CustomTabPanel, a11yProps } from "./MaterialUiTabs";
+// Models
+import { Task } from "../../../models/Task";
 
 export const TaskManage: React.FC = () => {
 	const filterdTasks = useRecoilValue(filterTasks);
