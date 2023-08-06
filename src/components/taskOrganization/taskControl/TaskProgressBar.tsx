@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 // Recoil
 import { useRecoilValue } from "recoil";
 import { selectedTaskState } from "../../../providers/selectedTaskProvider";
+// models
+import { Task } from "../../../models/Task";
 
 type TimeSegment = {
 	type: "work" | "pause";
@@ -11,15 +13,13 @@ type TimeSegment = {
 export const TaskProgressBar = () => {
 	const selectedTask = useRecoilValue(selectedTaskState);
 	const [segments, setSegments] = useState<TimeSegment[]>([]);
-	useEffect(() => {
-		const updatedProgress = () => {};
+
+	const updateSegments = (selectedTask: Task) => {
 		if (selectedTask) {
-			console.log(selectedTask);
 			const now = new Date();
 			let totalDuration = 0;
 			let previousEndTime = 0;
 			const tempSegments: TimeSegment[] = [];
-
 			if (selectedTask.start) {
 				totalDuration = now.getTime() - selectedTask.start.getTime();
 				previousEndTime = selectedTask.start.getTime();
@@ -67,8 +67,22 @@ export const TaskProgressBar = () => {
 				});
 			}
 
-			console.log(tempSegments);
 			setSegments(tempSegments);
+		}
+	};
+
+	useEffect(() => {
+		// タスクが開始または一時停止中の場合のみタイマーを設定
+		if (selectedTask?.status === "started") {
+			// 定期的にセグメントを再計算
+			const interval = setInterval(() => {
+				updateSegments(selectedTask); // 下記で定義する関数
+			}, 1000);
+
+			// クリーンアップ時にタイマーをクリア
+			return () => clearInterval(interval);
+		} else if (selectedTask?.status) {
+			updateSegments(selectedTask);
 		}
 	}, [selectedTask]);
 
