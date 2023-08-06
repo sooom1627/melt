@@ -3,9 +3,9 @@ import React from "react";
 import { useRecoilState } from "recoil";
 import { selectedTaskIdState } from "../../../providers/selectedTaskProvider";
 import { tagListState } from "../../../providers/tagsProvider";
-// utils
+// Utils
 import { formatElapsedTime } from "../../../utils/timeUtils";
-// models
+// Models
 import { Task } from "../../../models/Task";
 
 interface Props {

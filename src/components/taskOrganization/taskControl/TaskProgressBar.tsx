@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // Recoil
 import { useRecoilValue } from "recoil";
 import { selectedTaskState } from "../../../providers/selectedTaskProvider";
-// models
+// Models
 import { Task } from "../../../models/Task";
 
 type TimeSegment = {
