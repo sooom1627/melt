@@ -1,5 +1,5 @@
 import { Task } from "../models/Task"
-import { BarChartData } from "../models/Chart"
+import { TaskCountData, TaskTimeData } from "../models/Chart"
 
 const getPastSevenDays = (): string[] => {
   const dates: string[] = [];
@@ -13,7 +13,7 @@ const getPastSevenDays = (): string[] => {
   return dates;
 }
 
-export const generateBarChartData = (tasks: Task[]): BarChartData[] => {
+export const generateBarChartData = (tasks: Task[]): TaskCountData[] => {
   const taskSummary: { [date: string]: number } = {};
 
   tasks.forEach(task => {
@@ -33,5 +33,28 @@ export const generateBarChartData = (tasks: Task[]): BarChartData[] => {
   return lastSevenDays.map((date) => ({
     date,
     完了タスク: taskSummary[date] || 0,
+  }));
+}
+
+export const generateDurationBarChartData = (tasks: Task[]): TaskTimeData[] => {
+  const durationSummary: { [date: string]: number } = {};
+
+  tasks.forEach(task => {
+    if (task.status === "ended" && task.end && task.duration) {
+      const endDate = task.end.toLocaleDateString();
+
+      if (endDate in durationSummary) {
+        durationSummary[endDate] += task.duration;
+      } else {
+        durationSummary[endDate] = task.duration;
+      }
+    }
+  });
+
+  const lastSevenDays = getPastSevenDays();
+
+  return lastSevenDays.map((date) => ({
+    date,
+    経過時間: durationSummary[date] || 0,
   }));
 }

@@ -30,3 +30,7 @@ code {
 ::-webkit-scrollbar-thumb {
 	display: none;
 }
+
+rect:hover {
+	cursor: pointer;
+}
