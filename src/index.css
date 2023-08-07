@@ -33,4 +33,5 @@ code {
 
 rect:hover {
 	cursor: pointer;
+	opacity: 0.9;
 }
