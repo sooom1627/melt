@@ -41,7 +41,13 @@ export const TaskItem: React.FC<Props> = ({ task, type, disable }) => {
 					終了: {task.end?.toLocaleString()}
 				</time>
 			)}
-			<div className="flex items-start justify-between pb-3 relative after:transition-transform after:duration-500 after:ease-out after:absolute after:bottom-0 after:left-0 after:block after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-blue-400 after:content-[''] after:group-hover:origin-bottom-left after:group-hover:scale-x-100">
+			<div
+				className={`flex items-start justify-between pb-3 ${
+					disable !== ""
+						? "relative after:transition-transform after:duration-500 after:ease-out after:absolute after:bottom-0 after:left-0 after:block after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-blue-400 after:content-[''] after:group-hover:origin-bottom-left after:group-hover:scale-x-100"
+						: ""
+				} `}
+			>
 				<div className="overflow-hidden">
 					<h3 className="mt-2 mb-1 text-lg font-semibold text-gray-900 truncate ">
 						{task.name}
@@ -66,17 +72,21 @@ export const TaskItem: React.FC<Props> = ({ task, type, disable }) => {
 						))}
 					</div>
 				</div>
-				<div className="p-3" onClick={() => alert("作成中")}>
-					<svg
-						className="w-5 h-5 text-gray-800 dark:text-white"
-						aria-hidden="true"
-						xmlns="http://www.w3.org/2000/svg"
-						fill="currentColor"
-						viewBox="0 0 16 3"
-					>
-						<path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
-					</svg>
-				</div>
+				{disable !== "" ? (
+					<div className="p-3" onClick={() => alert("作成中")}>
+						<svg
+							className="w-5 h-5 text-gray-800 dark:text-white"
+							aria-hidden="true"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="currentColor"
+							viewBox="0 0 16 3"
+						>
+							<path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+						</svg>
+					</div>
+				) : (
+					<></>
+				)}
 			</div>
 		</li>
 	);
