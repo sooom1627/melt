@@ -58,3 +58,13 @@ export const generateDurationBarChartData = (tasks: Task[]): TaskTimeData[] => {
     経過時間: durationSummary[date] || 0,
   }));
 }
+
+export const formatMillisToHoursMinutesSeconds = (value: number | string) => {
+  const milliseconds = typeof value === "number" ? value : parseFloat(value);
+  let totalSeconds = Math.floor(milliseconds / 1000);
+  let hours = Math.floor(totalSeconds / 3600);
+  totalSeconds %= 3600;
+  let minutes = Math.floor(totalSeconds / 60);
+
+  return `${hours}h ${minutes}m`;
+};
