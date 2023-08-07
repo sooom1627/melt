@@ -23,7 +23,10 @@ export const TaskItem: React.FC<Props> = ({ task, type, disable }) => {
 		setSelectedTaskId(taskId);
 	};
 	return (
-		<li className="mb-5 ml-4">
+		<li
+			onClick={() => (disable !== "" ? selectTask(task.id) : console.log(""))}
+			className="ml-4 pt-3 group rounded cursor-pointer bg-transparent transition duration-150 ease-in-out"
+		>
 			<div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
 			{type === "todo" ? (
 				<time className="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
@@ -38,9 +41,9 @@ export const TaskItem: React.FC<Props> = ({ task, type, disable }) => {
 					終了: {task.end?.toLocaleString()}
 				</time>
 			)}
-			<div className="flex items-center justify-between">
+			<div className="flex items-start justify-between pb-3 relative after:transition-transform after:duration-500 after:ease-out after:absolute after:bottom-0 after:left-0 after:block after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-blue-400 after:content-[''] after:group-hover:origin-bottom-left after:group-hover:scale-x-100">
 				<div className="overflow-hidden">
-					<h3 className="mt-2 mb-1 text-lg font-semibold text-gray-900 dark:text-white truncate">
+					<h3 className="mt-2 mb-1 text-lg font-semibold text-gray-900 truncate ">
 						{task.name}
 					</h3>
 					<p className="text-sm font-normal text-gray-500 dark:text-gray-400">
@@ -63,31 +66,17 @@ export const TaskItem: React.FC<Props> = ({ task, type, disable }) => {
 						))}
 					</div>
 				</div>
-				{disable !== "" ? (
-					<div
-						onClick={() => selectTask(task.id)}
-						className="flex items-center px-4 py-2 ml-2 min-w-fit text-sm cursor-pointer font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700"
+				<div className="p-3" onClick={() => alert("作成中")}>
+					<svg
+						className="w-5 h-5 text-gray-800 dark:text-white"
+						aria-hidden="true"
+						xmlns="http://www.w3.org/2000/svg"
+						fill="currentColor"
+						viewBox="0 0 16 3"
 					>
-						タスク詳細
-						<svg
-							className="w-3 h-3 ml-2"
-							aria-hidden="true"
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 14 10"
-						>
-							<path
-								stroke="currentColor"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M1 5h12m0 0L9 1m4 4L9 9"
-							/>
-						</svg>
-					</div>
-				) : (
-					<></>
-				)}
+						<path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+					</svg>
+				</div>
 			</div>
 		</li>
 	);

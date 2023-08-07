@@ -128,12 +128,18 @@ export const TaskControl: React.FC = () => {
 						<div className="shadow-md rounded-md w-full">
 							<div className="p-5 text-center">
 								<div
-									className="w-full text-right cursor-pointer"
+									className="w-full flex justify-end cursor-pointer px-2"
 									onClick={() => toggleModal()}
 								>
-									<p className="text-2xl font-medium text-gray-900 hover:text-gray-500 dark:text-white">
-										...
-									</p>
+									<svg
+										className="w-5 h-5 text-gray-800 dark:text-white"
+										aria-hidden="true"
+										xmlns="http://www.w3.org/2000/svg"
+										fill="currentColor"
+										viewBox="0 0 16 3"
+									>
+										<path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+									</svg>
 								</div>
 								<h5 className="text-xl font-semibold mb-4 break-words">
 									{selectedTask?.name}
