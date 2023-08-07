@@ -35,7 +35,7 @@ export const AddTask: React.FC = () => {
 
 	return (
 		<form
-			className="w-full mb-8"
+			className="w-full mb-6"
 			onSubmit={(e) => {
 				e.preventDefault();
 				submitTask(inputTaskName);

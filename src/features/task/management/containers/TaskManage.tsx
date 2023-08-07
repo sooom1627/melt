@@ -47,19 +47,22 @@ export const TaskManage: React.FC = () => {
 	return (
 		<>
 			<AddTask />
+			<div className="sticky w-full">
+				<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+					<Tabs
+						value={value}
+						onChange={handleChange}
+						aria-label="basic tabs example"
+						variant="fullWidth"
+					>
+						<Tab label="Todo" {...a11yProps(0)} />
+						<Tab label="Doing" {...a11yProps(1)} />
+						<Tab label="Done" {...a11yProps(2)} />
+					</Tabs>
+				</Box>
+			</div>
 			<div className="overflow-scroll w-full">
 				<Box sx={{ width: "100%" }}>
-					<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-						<Tabs
-							value={value}
-							onChange={handleChange}
-							aria-label="basic tabs example"
-						>
-							<Tab label="Todo" {...a11yProps(0)} />
-							<Tab label="Doing" {...a11yProps(1)} />
-							<Tab label="Done" {...a11yProps(2)} />
-						</Tabs>
-					</Box>
 					<CustomTabPanel value={value} index={0}>
 						<TaskList
 							taskList={tasksByStatus.todoTasks}
