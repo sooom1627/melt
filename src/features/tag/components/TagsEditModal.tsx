@@ -187,6 +187,26 @@ export const TagsEditModal: React.FC<Props> = ({
 								<li className="w-8 h-8 mx-2">
 									<div className="flex h-full items-center">
 										<input
+											id="teal"
+											type="radio"
+											value="bg-teal-200 text-teal-800"
+											name="list-radio"
+											className="hidden"
+											onChange={handleColorChange}
+										/>
+										<label
+											htmlFor="teal"
+											className={`w-full h-full rounded-full py-3 text-sm font-medium text-gray-900 bg-teal-400 ${
+												selectedColorValue === "bg-teal-200 text-teal-800"
+													? "outline-teal-500 outline-4 outline"
+													: ""
+											}`}
+										></label>
+									</div>
+								</li>
+								<li className="w-8 h-8 mx-2">
+									<div className="flex h-full items-center">
+										<input
 											id="yellow"
 											type="radio"
 											value="bg-yellow-200 text-yellow-800"
